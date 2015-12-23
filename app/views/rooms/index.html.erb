@@ -1,0 +1,25 @@
+<% provide(:title, "Chatting Rooms") %>
+<div class="row">
+  <div class="col-md-9">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Current Rooms
+      </div>
+      <div class="panel-body">
+        <ul class="list-group">
+          <% @rooms.each do |room| %>
+          <li class="list-group-item">
+            <%= link_to room.name, room_path(room) %>
+          </li>
+        <% end %>
+        <% paginate @rooms %>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <%= link_to new_room_path, class: 'btn btn-primary' do %>
+      <span class="glyphicon glyphicon-plus">Create your chatting room.</span>
+    <% end %>
+  </div>
+</div>

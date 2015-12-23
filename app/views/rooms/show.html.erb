@@ -1,0 +1,8 @@
+<div id="messages">
+<%= render @messages %>
+</div>
+
+<%= form_for [@room, @message = Message.new] do |f| %>
+  <%= f.text_field :content %>
+  <%= f.submit "Send", class: "btn btn-primary" %>
+<% end %>
