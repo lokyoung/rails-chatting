@@ -1,24 +1,15 @@
-## README
+## Realtime Chatting
+This is a realtime-chatting room app base on Rails5
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Requirements
+* Ruby 2.2.0 +
+* Rails 5.0.0 + (currently beta)
+* Reids 2.2 +
+* Postgresql, Mysql or sqlite3
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Run
+```sh
+$ bundle install
+$ bin/rails db:migrate
+$ bin/rails server
+```
