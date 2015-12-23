@@ -1,0 +1,26 @@
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <h4 class="modal-title" id="myModalLabel">Add New Member</h4>
+    </div>
+    <div class="modal-body">
+      <table class="table">
+        <% User.page(params[:page]).each do |user| %>
+          <tr>
+            <td>
+              <% unless room.users.include? user %>
+                <%= user.name %>
+                <%= link_to add_member_room_path(id: room.id, user_id: user.id), method: :post, remote: true do %>
+                  <span style="float: right" class="glyphicon glyphicon-plus"></span>
+                <% end %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    </div>
+  </div>

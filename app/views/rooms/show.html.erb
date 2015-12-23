@@ -1,8 +1,29 @@
-<div id="messages">
-<%= render @messages %>
-</div>
+<div class="row">
+  <div class="col-md-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Room Members
+        <span style="float: right" class="glyphicon glyphicon-plus" data-toggle="modal" data-target="#addMember"></span>
+        <div class="modal fade" id="addMember" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <%= render 'add_member', room: @room %>
+        </div>
+      </div>
+    </div>
 
-<%= form_for [@room, @message = Message.new] do |f| %>
-  <%= f.text_field :content %>
-  <%= f.submit "Send", class: "btn btn-primary" %>
-<% end %>
+    <div class="panel-body" id="room-user-list">
+      <%= render 'room_user_list', room: @room %>
+    </div>
+  </div>
+</div>
+<div class="col-md-9">
+  <ul id="messages" class="list-group">
+    <%= render @messages %>
+    <% paginate @messages %>
+  </ul>
+
+  <%= form_for([@room, @message = Message.new], remote: true) do |f| %>
+    <%= f.text_field :content %>
+    <%= f.submit "Send", class: "btn btn-primary" %>
+  <% end %>
+</div>
+</div>

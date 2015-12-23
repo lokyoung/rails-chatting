@@ -23,6 +23,8 @@ gem 'puma'
 gem 'bootstrap-sass'
 gem 'kaminari'
 gem 'pry'
+gem 'letter_avatar'
+gem 'chinese_pinyin'
 
 # Use ActiveModel has_secure_password
  gem 'bcrypt', '~> 3.1.7'

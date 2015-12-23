@@ -1,0 +1,16 @@
+<ul class="list-group">
+  <% room.users.each do |user| %>
+    <li class="list-group-item">
+      <%= user.name %>
+      <% if room.owner.id == user.id %>
+        <span style="float: right" class="glyphicon glyphicon-user"></span>
+      <% else %>
+        <% if room.owner.id == current_user.id %>
+          <%= link_to remove_member_room_path(id: room.id, user_id: user.id), method: :delete, remote: true do %>
+            <span style="float: right" class="glyphicon glyphicon-minus"></span>
+          <% end %>
+        <% end %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>

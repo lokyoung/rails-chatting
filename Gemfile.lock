@@ -72,6 +72,7 @@ GEM
       timers (>= 4.1.1)
     celluloid-supervision (0.20.5)
       timers (>= 4.1.1)
+    chinese_pinyin (1.0.0)
     coderay (1.1.0)
     coffee-rails (4.1.1)
       coffee-script (>= 2.2.0)
@@ -107,6 +108,7 @@ GEM
     kaminari (0.16.3)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
+    letter_avatar (0.1.4)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
@@ -191,10 +193,12 @@ DEPENDENCIES
   bcrypt (~> 3.1.7)
   bootstrap-sass
   byebug
+  chinese_pinyin
   coffee-rails (~> 4.1.0)
   jbuilder (~> 2.0)
   jquery-rails
   kaminari
+  letter_avatar
   pry
   puma
   rails (>= 5.0.0.beta1, < 5.1)

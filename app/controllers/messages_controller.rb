@@ -4,7 +4,11 @@ class MessagesController < ApplicationController
     @message = @room.messages.new(message_params.merge(user_id: current_user.id))
     if @message.save
       ActionCable.server.broadcast "room_channel_#{@room.id}", message: render_message(@message)
-      redirect_to @room
+      #redirect_to @room
+      respond_to do |format|
+        format.html { redirect_to @room }
+        format.js
+      end
     else
       redirect_to @room
     end

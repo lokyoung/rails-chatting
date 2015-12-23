@@ -16,5 +16,9 @@ Rails.application.routes.draw do
 
   resources :rooms do
     resources :messages
+    member do
+      post 'add_member/:user_id', to: 'rooms#add_member', as: :add_member
+      delete 'remove_member/:user_id', to: 'rooms#remove_member', as: :remove_member
+    end
   end
 end
