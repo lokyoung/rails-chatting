@@ -15,5 +15,8 @@ module RealtimeChatting
       config.cache_base_path = 'public/system/lets' # default is 'public/system'
       config.colors_palette = :iwanthue             # default is :google
     end
+
+    # use sidekiq as the activejob adapter
+    config.active_job.queue_adapter = :sidekiq
   end
 end

@@ -82,6 +82,7 @@ GEM
       execjs
     coffee-script-source (1.10.0)
     concurrent-ruby (1.0.0)
+    connection_pool (2.2.0)
     debug_inspector (0.0.2)
     em-hiredis (0.3.0)
       eventmachine (~> 1.0)
@@ -158,6 +159,11 @@ GEM
     rake (10.4.2)
     redis (3.2.2)
     sass (3.4.20)
+    sidekiq (4.0.1)
+      concurrent-ruby (~> 1.0)
+      connection_pool (~> 2.2, >= 2.2.0)
+      json (~> 1.0)
+      redis (~> 3.2, >= 3.2.1)
     slop (3.6.0)
     sprockets (3.5.2)
       concurrent-ruby (~> 1.0)
@@ -202,6 +208,7 @@ DEPENDENCIES
   pry
   puma
   rails (>= 5.0.0.beta1, < 5.1)
+  sidekiq
   sqlite3
   turbolinks
   tzinfo-data
