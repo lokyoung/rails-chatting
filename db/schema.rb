@@ -17,6 +17,8 @@ ActiveRecord::Schema.define(version: 20151223020948) do
     t.text    "content"
     t.integer "user_id"
     t.integer "room_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["room_id"], name: "index_messages_on_room_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
   end

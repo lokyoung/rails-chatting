@@ -16,6 +16,10 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
+config/database.yml
+public/system
+public/uploads
+.DS_Store
 
 # Ignore Byebug command history file.
 .byebug_history

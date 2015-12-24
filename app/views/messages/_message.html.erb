@@ -1,4 +1,23 @@
-<%= message.user.name %>
-<li id="message" class="list-group-item">
-  <%= message.content %>
-</li>
+<% if message.user == current_user %>
+  <div style="margin-bottom: 10px">
+    <li id="message" style="list-style: none;">
+      <span style="float: right">
+      <%= image_tag(message.user.avatar_url, width: 42) %>
+      </span>
+      <span class="list-group-item list-group-item-info" style="width: 75%; margin-left: 150px " >
+        <%= message.content %>
+      </span>
+    </li>
+  </div>
+<% else %>
+  <div style="margin-bottom: 10px">
+    <%= message.user.name %>
+    <li id="message" style="list-style: none;">
+      <%= image_tag(message.user.avatar_url, width: 42) %>
+      <span class="list-group-item" style="width: 85%; float: right; margin-right: 80px;" >
+        <%= message.content %>
+      </span>
+    </li>
+  </div>
+<% end %>
+

@@ -11,5 +11,9 @@ module RealtimeChatting
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
+    LetterAvatar.setup do |config|
+      config.cache_base_path = 'public/system/lets' # default is 'public/system'
+      config.colors_palette = :iwanthue             # default is :google
+    end
   end
 end

@@ -3,12 +3,15 @@ class MessagesController < ApplicationController
     @room = Room.find(params[:room_id])
     @message = @room.messages.new(message_params.merge(user_id: current_user.id))
     if @message.save
-      ActionCable.server.broadcast "room_channel_#{@room.id}", message: render_message(@message)
-      #redirect_to @room
-      respond_to do |format|
-        format.html { redirect_to @room }
-        format.js
+      @room.user_ids.each do |user_id|
+        if user_id == @message.user.id
+          ActionCable.server.broadcast "room_channel_#{@room.id}_#{user_id}", message: render_my_message(@message)
+        else
+          ActionCable.server.broadcast "room_channel_#{@room.id}_#{user_id}", message: render_message(@message)
+        end
       end
+      # ActionCable.server.broadcast "room_channel_#{@room.id}_", message: render_message(@message)
+      #redirect_to @room
     else
       redirect_to @room
     end
@@ -22,5 +25,9 @@ class MessagesController < ApplicationController
 
   def render_message(message)
     ApplicationController.renderer.render(partial: 'messages/message', locals: { message: message })
+  end
+
+  def render_my_message(message)
+    ApplicationController.renderer.render(partial: 'messages/message', locals: { message: message, current_user: current_user })
   end
 end
