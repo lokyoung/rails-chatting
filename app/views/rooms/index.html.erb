@@ -5,21 +5,17 @@
       <div class="panel-heading">
         Current Rooms
       </div>
-      <div class="panel-body">
-        <ul class="list-group">
-          <% @rooms.each do |room| %>
-          <li class="list-group-item">
-            <%= link_to room.name, room_path(room) %>
-          </li>
-        <% end %>
-        <% paginate @rooms %>
-        </ul>
+      <div class="panel-body" id="room-list">
+        <%= render 'room_list', rooms: @rooms %>
       </div>
     </div>
   </div>
   <div class="col-md-3">
-    <%= link_to new_room_path, class: 'btn btn-primary', remote: true do %>
+    <a class="btn btn-primary" data-toggle="modal" data-target="#addRoom" id="addRoom-button">
       <span class="glyphicon glyphicon-plus">Create your chatting room.</span>
-    <% end %>
+    </a>
+    <div class="modal fade" id="addRoom" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <%= render 'add_room' %>
+    </div>
   </div>
 </div>

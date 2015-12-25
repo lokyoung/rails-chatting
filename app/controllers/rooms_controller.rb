@@ -7,7 +7,7 @@ class RoomsController < ApplicationController
 
   def show
     @room = Room.find(params[:id])
-    @messages = Message.page params[:page]
+    @messages = @room.messages.page(params[:page])
   end
 
   def new
@@ -16,11 +16,16 @@ class RoomsController < ApplicationController
 
   def create
     @room = Room.new(room_params.merge(owner_id: current_user.id))
+    @rooms = Room.page params[:page]
     if @room.save
+      flash[:success] = "Create room suceess"
       user_ids = []
       user_ids << current_user.id
       @room.user_ids = user_ids
-      redirect_to rooms_url
+      respond_to do |format|
+        format.html { redirect_to rooms_url }
+        format.js
+      end
     else
       render 'new'
     end
@@ -32,6 +37,17 @@ class RoomsController < ApplicationController
 
   def update
     @room = Room.find(params[:id])
+  end
+
+  def destroy
+    @room = Room.find(params[:id])
+    @room.destroy
+    flash[:success] = 'Room has been destory'
+    @rooms = Room.page(params[:page])
+    respond_to do |format|
+      format.html { redirect_to rooms_url }
+      format.js
+    end
   end
 
   def add_member
@@ -71,4 +87,5 @@ class RoomsController < ApplicationController
       redirect_to rooms_url
     end
   end
+
 end

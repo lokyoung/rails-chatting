@@ -16,10 +16,17 @@
   </div>
 </div>
 <div class="col-md-9">
-  <ul id="messages" class="list-group">
-    <%= render @messages %>
-    <% paginate @messages %>
-  </ul>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      Messages List
+    </div>
+    <div class="panel-body">
+      <ul id="messages" class="list-group">
+        <%= render @messages %>
+      </ul>
+      <%= paginate @messages %>
+    </div>
+  </div>
 
   <%= form_for([@room, @message = Message.new], remote: true) do |f| %>
     <%= f.text_field :content %>

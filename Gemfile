@@ -20,15 +20,14 @@ gem 'jbuilder', '~> 2.0'
 gem 'puma'
 
 gem 'bootstrap-sass'
-gem 'kaminari'
 gem 'pry'
-gem 'letter_avatar'
-gem 'chinese_pinyin'
 gem 'sidekiq'
+gem 'chinese_pinyin'
+gem 'letter_avatar'
+gem 'kaminari', :git => "git://github.com/amatsuda/kaminari.git", :branch => 'master'
 
 # Use ActiveModel has_secure_password
- gem 'bcrypt', '~> 3.1.7'
-
+gem 'bcrypt', '~> 3.1.7'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

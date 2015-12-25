@@ -4,9 +4,9 @@ class MessageBroadcastJob < ApplicationJob
   def perform(message)
     message.room.user_ids.each do |user_id|
       if user_id == message.user.id
-        ActionCable.server.broadcast "room_channel_#{message.room.id}_#{user_id}", message: render_my_message(message)
+        ActionCable.server.broadcast "room_channel_#{message.room.id}_user_#{user_id}", message: render_my_message(message)
       else
-        ActionCable.server.broadcast "room_channel_#{message.room.id}_#{user_id}", message: render_message(message)
+        ActionCable.server.broadcast "room_channel_#{message.room.id}_user_#{user_id}", message: render_message(message)
       end
     end
   end

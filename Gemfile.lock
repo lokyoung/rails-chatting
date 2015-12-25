@@ -1,3 +1,12 @@
+GIT
+  remote: git://github.com/amatsuda/kaminari.git
+  revision: 45ee71b74c7a21333e2b05ae8672a0e8c0625e38
+  branch: master
+  specs:
+    kaminari (1.0.0.alpha)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -106,9 +115,6 @@ GEM
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
     json (1.8.3)
-    kaminari (0.16.3)
-      actionpack (>= 3.0.0)
-      activesupport (>= 3.0.0)
     letter_avatar (0.1.4)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
@@ -203,7 +209,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   jbuilder (~> 2.0)
   jquery-rails
-  kaminari
+  kaminari!
   letter_avatar
   pry
   puma

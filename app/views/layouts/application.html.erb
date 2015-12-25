@@ -13,9 +13,7 @@
     <%= render 'layouts/header' %>
     <div class="container">
       <div id="flash-message">
-        <% flash.each do |message_type, message| %>
-          <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
-        <% end %>
+        <%= render 'layouts/flash_message' %>
       </div>
       <%= yield %>
     </div>
