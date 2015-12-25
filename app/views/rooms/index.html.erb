@@ -11,11 +11,16 @@
     </div>
   </div>
   <div class="col-md-3">
+    <% if user_sign_in? %>
     <a class="btn btn-primary" data-toggle="modal" data-target="#addRoom" id="addRoom-button">
       <span class="glyphicon glyphicon-plus">Create your chatting room.</span>
     </a>
     <div class="modal fade" id="addRoom" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
       <%= render 'add_room' %>
     </div>
+      <div id="my-room-list" style="margin-top: 10px">
+        <%= render 'my_room_list', rooms: current_user.rooms.page(params[:page]) %>
+      </div>
+    <% end %>
   </div>
 </div>

@@ -1,3 +1,4 @@
 $('#room-list').html("<%= escape_javascript(render('rooms/room_list', rooms: @rooms)) %>");
+$('#my-room-list').html("<%= escape_javascript(render('rooms/my_room_list', rooms: current_user.rooms.page(params[:page]))) %>");
 $("#flash-message").html("<%= escape_javascript(render('layouts/flash_message'))%>");
 $("#addRoom-button").click();

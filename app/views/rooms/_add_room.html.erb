@@ -5,18 +5,18 @@
       <h4 class="modal-title" id="myModalLabel">Add New Member</h4>
     </div>
     <div class="modal-body">
-      <table class="table">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            New Room
-          </div>
-          <div class="panel-body">
-            <%= form_for(@room = Room.new, remote: true) do |f| %>
-              <%= f.label :name %>
-              <%= f.text_field :name, class: 'form-control' %>
-              <%= f.submit 'create', class: 'btn btn-primary' %>
-            <% end %>
-          </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          New Room
         </div>
+        <div class="panel-body">
+          <%= form_for(@room = Room.new, remote: true) do |f| %>
+            <%= f.label :name %>
+            <%= f.text_field :name, class: 'form-control' %>
+            <%= f.submit 'create', class: 'btn btn-primary' %>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
+</div>

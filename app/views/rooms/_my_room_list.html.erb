@@ -1,0 +1,20 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    My Rooms
+  </div>
+  <div class="panel-body">
+    <ul class="list-group">
+      <% rooms.each do |room| %>
+        <li class="list-group-item">
+          <%= link_to room.name, room_path(room) %>
+          <% if room.owner.id == current_user.id %>
+            <%= link_to room_path(room), method: :delete, remote: true, onclick: "confirm('Are you sure to delete?')" do %>
+              <span style="float: right" class="glyphicon glyphicon-trash"></span>
+            <% end %>
+          <% end %>
+        </li>
+      <% end %>
+      <% paginate rooms %>
+    </ul>
+  </div>
+</div>
