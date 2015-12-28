@@ -1,0 +1,21 @@
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <h4 class="modal-title" id="myModalLabel">Join this room</h4>
+    </div>
+    <div class="modal-body">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          Join this Room
+        </div>
+        <div class="panel-body">
+          <%= form_for(@notification = Notification.new, url: join_room_path(room), remote: true) do |f| %>
+            <%= f.label :content %>
+            <%= f.text_field :content, class: 'form-control' %>
+            <%= f.submit 'Submit', class: 'btn btn-primary' %>
+        <% end %>
+        </div>
+      </div>
+    </div>
+  </div>

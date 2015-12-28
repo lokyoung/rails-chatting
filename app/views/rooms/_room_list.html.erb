@@ -3,9 +3,10 @@
     <li class="list-group-item">
       <%= link_to room.name, room_path(room) %>
       <% unless room.users.include?(current_user) %>
-        <%= link_to room_path(room), remote: true, onclick: "confirm('Are you sure to delete?')" do %>
-          <span style="float: right" class="glyphicon glyphicon-plus"></span>
-        <% end %>
+        <span style="float: right" id="join-room" class="glyphicon glyphicon-plus" data-toggle="modal" data-target="#joinRoom"></span>
+        <div class="modal fade" id="joinRoom" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <%= render 'join_room', room: room %>
+        </div>
       <% end %>
     </li>
   <% end %>

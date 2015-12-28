@@ -18,7 +18,7 @@
     <div class="modal fade" id="addRoom" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
       <%= render 'add_room' %>
     </div>
-      <div id="my-room-list" style="margin-top: 10px">
+    <div id="my-room-list" style="margin-top: 10px">
         <%= render 'my_room_list', rooms: current_user.rooms.page(params[:page]) %>
       </div>
     <% end %>

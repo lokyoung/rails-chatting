@@ -11,16 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151223020948) do
+ActiveRecord::Schema.define(version: 20151225090602) do
 
   create_table "messages", force: :cascade do |t|
-    t.text    "content"
-    t.integer "user_id"
-    t.integer "room_id"
+    t.text     "content"
+    t.integer  "user_id"
+    t.integer  "room_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["room_id"], name: "index_messages_on_room_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.string   "title"
+    t.text     "content"
+    t.integer  "recipient_id"
+    t.integer  "actor_id"
+    t.boolean  "unread",          default: true
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.integer  "notifiable_id"
+    t.string   "notifiable_type"
+    t.boolean  "solved",          default: false
+    t.index ["notifiable_id", "notifiable_type"], name: "index_notifications_on_notifiable_id_and_notifiable_type"
   end
 
   create_table "rooms", force: :cascade do |t|

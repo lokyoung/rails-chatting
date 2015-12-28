@@ -5,6 +5,7 @@ class User < ApplicationRecord
   has_secure_password
   #has_many :rooms, dependent: :destroy
   has_and_belongs_to_many :rooms
+  has_many :notifications, foreign_key: :recipient_id
 
   def username_for_avatar
     Pinyin.t(self.name)

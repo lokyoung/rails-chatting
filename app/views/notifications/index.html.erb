@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      Notifications
+    </div>
+    <div class="panel-body">
+      <% if @notifications.blank? %>
+        None
+      <% else %>
+        <ul class="list-group">
+          <% @notifications.each do |notification| %>
+            <% if notification.unread? %>
+              <li class="list-group-item list-group-item-warning">
+                <% notification.update_attributes(unread: false) %>
+              <% else %>
+                <li class="list-group-item">
+                <% end %>
+                <%= notification.title %><br/>
+                <%= notification.content %>
+                <%= render 'notifications/deal_rooms', notification: notification %>
+                </li>
+              <% end %>
+        </ul>
+      <% end %>
+    </div>
+  </div>
+</div>

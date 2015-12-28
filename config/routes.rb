@@ -21,4 +21,8 @@ Rails.application.routes.draw do
       delete 'remove_member/:user_id', to: 'rooms#remove_member', as: :remove_member
     end
   end
+
+  resources :notifications
+  post 'join_room/:id', to: 'notifications#join_room', as: :join_room
+  post 'accept_join/:id', to: 'notifications#accept_join', as: :accept_join,format: :json
 end
