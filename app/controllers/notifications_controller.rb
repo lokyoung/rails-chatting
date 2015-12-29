@@ -31,7 +31,6 @@ class NotificationsController < ApplicationController
     user_ids = @room.user_ids
     user_ids << @user.id
     @room.user_ids = user_ids
-    #render status: 200, json: {message: "success"}
     respond_to do |format|
       format.html { redirect_to notifications_url }
       format.js

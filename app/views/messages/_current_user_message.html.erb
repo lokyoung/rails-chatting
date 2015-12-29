@@ -1,10 +1,10 @@
-  <div style="margin-bottom: 10px">
-    <li id="message" style="list-style: none;">
-      <span style="float: right">
+<div style="margin-bottom: 10px">
+  <li id="message" style="list-style: none;">
+    <span style="float: right" class="user-avatar">
       <%= image_tag(message.user.avatar_url, width: 42) %>
-      </span>
-      <span class="list-group-item list-group-item-info" style="width: 75%; margin-left: 150px " >
-        <%= message.content %>
-      </span>
-    </li>
-  </div>
+    </span>
+    <span class="list-group-item list-group-item-info" style="width: 75%; margin-left: 150px">
+      <%= message.content %>
+    </span>
+  </li>
+</div>

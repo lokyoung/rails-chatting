@@ -1,4 +1,21 @@
 /*
-  Place all the styles related to the matching controller here.
-  They will automatically be included in application.css.
-*/
+Place all the styles related to the matching controller here.
+They will automatically be included in application.css.
+ */
+
+.user-message .user-avatar{
+  float: right;
+}
+.user-message .user-name{
+  display: none;
+}
+.user-message #user-message-content{
+  width: 75%;
+  margin-right: 11px;
+  color: #31708f;
+  background-color: #d9edf7;
+}
+
+.common{
+  width: 85%; float: right; margin-right: 70px;
+}

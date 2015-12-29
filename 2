@@ -7,12 +7,10 @@ App.room = App.cable.subscriptions.create "RoomChannel",
 
   received: (data) ->
     # Called when there's incoming data on the websocket for this channel
-    current_user_id = Window.current_user_id
     a = $(data['message'])
-    if current_user_id == data['user_id']
-      a.addClass("user-message")
+    console.log(a)
+    a.addClass("user-message")
     $('#messages').append a
 
   speak: (message) ->
     @perform 'speak', message: message
-

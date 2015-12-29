@@ -1,9 +1,13 @@
-  <div style="margin-bottom: 10px">
+<div style="margin-bottom: 10px">
+  <span class="user-name">
     <%= message.user.name %>
-    <li id="message" style="list-style: none;">
+  </span>
+  <li id="message" style="list-style: none;">
+    <span class="user-avatar">
       <%= image_tag(message.user.avatar_url, width: 42) %>
-      <span class="list-group-item" style="width: 85%; float: right; margin-right: 80px;" >
-        <%= message.content %>
-      </span>
-    </li>
-  </div>
+    </span>
+    <span class="list-group-item common" id="user-message-content">
+      <%= message.content %>
+    </span>
+  </li>
+</div>
