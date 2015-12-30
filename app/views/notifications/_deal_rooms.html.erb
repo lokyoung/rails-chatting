@@ -1,5 +1,11 @@
 <% unless notification.solved? %>
+<<<<<<< HEAD
   <span style="float: right" id="deal-room">
     <%= link_to 'Accept', accept_join_path(notification), class: "btn btn-primary", remote: true %>
+=======
+  <span style="float: right">
+    <%= link_to 'Accept', accept_join_path(notification), class: "btn btn-primary", remote: true %>
+    <%= link_to 'Reject', reject_join_path(notification), class: "btn btn-default", remote: true %>
+>>>>>>> notification
   </span>
 <% end %>

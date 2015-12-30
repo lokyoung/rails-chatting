@@ -24,5 +24,6 @@ Rails.application.routes.draw do
 
   resources :notifications
   post 'join_room/:id', to: 'notifications#join_room', as: :join_room
-  post 'accept_join/:id', to: 'notifications#accept_join', as: :accept_join,format: :json
+  get 'accept_join/:id', to: 'notifications#accept_join', as: :accept_join
+  get 'reject_join/:id', to: 'notifications#reject_join', as: :reject_join
 end

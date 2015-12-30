@@ -17,7 +17,14 @@
                 <% end %>
                 <%= notification.title %><br/>
                 <%= notification.content %>
-                <%= render 'notifications/deal_rooms', notification: notification %>
+                <span id="notification-deal<%= notification.id %>">
+                  <% unless notification.solved? %>
+                    <span style="float: right" id="deal-room">
+                      <%= link_to 'Accept', accept_join_path(notification), class: "btn btn-primary", remote: true %>
+                      <%= link_to 'Reject', reject_join_path(notification), class: "btn btn-default", remote: true %>
+                    </span>
+                  <% end %>
+                </span>
                 </li>
               <% end %>
         </ul>

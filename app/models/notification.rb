@@ -4,4 +4,5 @@ class Notification < ApplicationRecord
   belongs_to :notifiable, polymorphic: true
 
   scope :unread, -> { where(unread: true) }
+  after_create_commit { NotificationBroadcastJob.perform_later self }
 end
