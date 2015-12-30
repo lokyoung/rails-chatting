@@ -37,8 +37,6 @@ class NotificationsController < ApplicationController
     user_ids = @room.user_ids
     user_ids << @user.id
     @room.user_ids = user_ids
-<<<<<<< HEAD
-=======
     respond_to do |format|
       format.html { redirect_to notifications_url }
       format.js
@@ -54,7 +52,6 @@ class NotificationsController < ApplicationController
     else
       Notification.create!(title: "Reject", content: "Request to join room #{@notification.notifiable.name} reject", actor_id: current_user.id, recipient_id: recipient.id, notifiable: @notification.notifiable, solved: true)
     end
->>>>>>> notification
     respond_to do |format|
       format.html { redirect_to notifications_url }
       format.js
