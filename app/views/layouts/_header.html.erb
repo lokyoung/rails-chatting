@@ -10,7 +10,7 @@
         <li><%= link_to "Log Out", log_out_path, method: "delete" %></li>
         <li>
         <%= link_to notifications_path do %>
-          <span class="glyphicon glyphicon-bell" id="notices" data-channel="notices">
+          <span class="glyphicon glyphicon-bell" id="notices" data-channel="notification">
             <% if unread_notify_count != 0 %>
               <%= unread_notify_count %>
             <% end %>

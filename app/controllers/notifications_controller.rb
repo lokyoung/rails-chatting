@@ -8,7 +8,7 @@ class NotificationsController < ApplicationController
     @room = Room.find(params[:id])
     @notification = Notification.new(notification_params.merge(title: "Join request to your room #{@room.name}", actor_id: current_user.id, recipient_id: @room.owner_id, notifiable: @room))
     if @notification.save
-      user = @notification.user
+      user = @notification.recipient
       ActionCable.server.broadcast "notification:#{user.id}", { body: user.notifications.unread.count.to_s }
       flash[:success] = 'Please wait for accepet.'
       respond_to do |format|
@@ -31,10 +31,24 @@ class NotificationsController < ApplicationController
     user_ids = @room.user_ids
     user_ids << @user.id
     @room.user_ids = user_ids
-    #render status: 200, json: {message: "success"}
     respond_to do |format|
       format.html { redirect_to notifications_url }
       format.js
+    end
+  end
+
+  def reject_join
+    @notification = Notification.find_by(id: params[:id])
+    @notification.update_attributes(solved: true)
+    recipient = @notification.actor
+    @notification_send = Notification.new(title: "Reject", content: "Request to join room #{@notification.notifiable.name} reject", actor_id: current_user.id, recipient_id: recipient.id, notifiable: @notification.notifiable, solved: true)
+    if @notification_send.save
+      user = @notification_send.recipient
+      ActionCable.server.broadcast "notification:#{user.id}", { body: user.notifications.unread.count.to_s }
+      respond_to do |format|
+        format.html { redirect_to notifications_url }
+        format.js
+      end
     end
   end
 
@@ -43,4 +57,5 @@ class NotificationsController < ApplicationController
   def notification_params
     params.require(:notification).permit(:content)
   end
+
 end

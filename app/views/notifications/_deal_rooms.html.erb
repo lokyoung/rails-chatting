@@ -1,16 +1,6 @@
-<script type="text/javascript" charset="utf-8">
-$(function(){
-  $("#accept").on("click", function() {
-    $.post("/accept_join/<%=notification.id%>",function(result) {
-      if (result.message === "success") {
-        $(this).parent().attr("style", "display:none;");
-      }
-    })
-  });
-});
-</script>
 <% unless notification.solved? %>
-  <span style="float: right" id="deal-room">
-    <%= link_to 'Accept', accept_join_path(notification), class: "btn btn-primary", id: "accept" %>
+  <span style="float: right">
+    <%= link_to 'Accept', accept_join_path(notification), class: "btn btn-primary", remote: true %>
+    <%= link_to 'Reject', reject_join_path(notification), class: "btn btn-default", remote: true %>
   </span>
 <% end %>
