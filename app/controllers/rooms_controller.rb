@@ -53,9 +53,8 @@ class RoomsController < ApplicationController
   def add_member
     @room = Room.find(params[:id])
     @user = User.find(params[:user_id])
-    user_ids = @room.user_ids
-    user_ids << @user.id
-    @room.user_ids = user_ids
+    Notification.create!(title: "Room invite", content: "Request to invite you to join room #{@room.name}", actor_id: current_user.id, recipient_id: @user.id, notifiable: @room)
+    flash[:success] = 'Please wait for accept'
     respond_to do |format|
       format.html { redirect_to @room }
       format.js
@@ -68,6 +67,8 @@ class RoomsController < ApplicationController
     user_ids = @room.user_ids
     user_ids.delete @user.id
     @room.user_ids = user_ids
+    # send notification to the user
+    Notification.create!(title: "Room kick off", content: "You have been kick off from room #{@room.name}", actor_id: current_user.id, recipient_id: @user.id, notifiable: @room, solved: true)
     respond_to do |format|
       format.html { redirect_to @room }
       format.js

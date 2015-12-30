@@ -25,12 +25,16 @@ class NotificationsController < ApplicationController
     @notification = Notification.find_by(id: params[:id])
     @notification.update_attributes(solved: true)
     @room = Room.find_by(id: @notification.notifiable.id)
+    if @notification.title == "Room invite"
+      @user = User.find_by(id: @notification.recipient_id)
+      Notification.create!(title: "Accept to join your room", content: "Request to invite #{@notification.recipient.name} to join room #{@notification.notifiable.name} accept", actor_id: current_user.id, recipient_id: @notification.actor.id, notifiable: @notification.notifiable, solved: true)
+    else
     @user = User.find_by(id: @notification.actor_id)
+      Notification.create!(title: "Accept", content: "Request to join room #{@notification.notifiable.name} accept", actor_id: current_user.id, recipient_id: @notification.actor.id, notifiable: @notification.notifiable, solved: true)
+    end
     user_ids = @room.user_ids
     user_ids << @user.id
     @room.user_ids = user_ids
-    recipient = @notification.actor
-    Notification.create!(title: "Accept", content: "Request to join room #{@notification.notifiable.name} accept", actor_id: current_user.id, recipient_id: recipient.id, notifiable: @notification.notifiable, solved: true)
     respond_to do |format|
       format.html { redirect_to notifications_url }
       format.js
@@ -41,7 +45,11 @@ class NotificationsController < ApplicationController
     @notification = Notification.find_by(id: params[:id])
     @notification.update_attributes(solved: true)
     recipient = @notification.actor
-    Notification.create!(title: "Reject", content: "Request to join room #{@notification.notifiable.name} reject", actor_id: current_user.id, recipient_id: recipient.id, notifiable: @notification.notifiable, solved: true)
+    if @notification.title == "Room invite"
+      Notification.create!(title: "Reject to join your room", content: "Request to invite #{@notification.recipient.name} to join room #{@notification.notifiable.name} is rejected", actor_id: current_user.id, recipient_id: recipient.id, notifiable: @notification.notifiable, solved: true)
+    else
+      Notification.create!(title: "Reject", content: "Request to join room #{@notification.notifiable.name} reject", actor_id: current_user.id, recipient_id: recipient.id, notifiable: @notification.notifiable, solved: true)
+    end
     respond_to do |format|
       format.html { redirect_to notifications_url }
       format.js
