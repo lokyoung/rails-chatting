@@ -19,9 +19,7 @@ class RoomsController < ApplicationController
     @rooms = Room.page params[:page]
     if @room.save
       flash[:success] = "Create room suceess"
-      user_ids = []
-      user_ids << current_user.id
-      @room.user_ids = user_ids
+      @room << current_user
       respond_to do |format|
         format.html { redirect_to rooms_url }
         format.js
@@ -56,9 +54,7 @@ class RoomsController < ApplicationController
   def remove_member
     @room = Room.find(params[:id])
     @user = User.find(params[:user_id])
-    user_ids = @room.user_ids
-    user_ids.delete @user.id
-    @room.user_ids = user_ids
+    @room.delete(@user)
     # send notification to the user
     Notification.create!(title: "Room kick off", content: "You have been kick off from room #{@room.name}", actor_id: current_user.id, recipient_id: @user.id, notifiable: @room, solved: true)
     respond_to do |format|
