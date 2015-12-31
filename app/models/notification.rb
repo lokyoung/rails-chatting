@@ -5,4 +5,5 @@ class Notification < ApplicationRecord
 
   scope :unread, -> { where(unread: true) }
   after_create_commit { NotificationBroadcastJob.perform_later self }
+  enum n_type: [ :normal_notice, :join_request, :invite_reuqest ]
 end

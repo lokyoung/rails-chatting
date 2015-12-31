@@ -31,14 +31,6 @@ class RoomsController < ApplicationController
     end
   end
 
-  def edit
-    @room = Room.find(params[:id])
-  end
-
-  def update
-    @room = Room.find(params[:id])
-  end
-
   def destroy
     @room = Room.find(params[:id])
     @room.destroy
@@ -53,7 +45,7 @@ class RoomsController < ApplicationController
   def add_member
     @room = Room.find(params[:id])
     @user = User.find(params[:user_id])
-    Notification.create!(title: "Room invite", content: "Request to invite you to join room #{@room.name}", actor_id: current_user.id, recipient_id: @user.id, notifiable: @room)
+    Notification.create!(title: "Room invite", content: "Request to invite you to join room #{@room.name}", actor_id: current_user.id, recipient_id: @user.id, notifiable: @room, n_type: "invite_request")
     flash[:success] = 'Please wait for accept'
     respond_to do |format|
       format.html { redirect_to @room }

@@ -10,7 +10,7 @@
           Join this Room
         </div>
         <div class="panel-body">
-          <%= form_for(@notification = Notification.new, url: join_room_path(room), remote: true) do |f| %>
+          <%= form_for(@notification = Notification.new, url: join_room_request_path(room), remote: true) do |f| %>
             <%= f.label :content %>
             <%= f.text_field :content, class: 'form-control' %>
             <%= f.submit 'Submit', class: 'btn btn-primary' %>

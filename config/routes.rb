@@ -23,7 +23,9 @@ Rails.application.routes.draw do
   end
 
   resources :notifications
-  post 'join_room/:id', to: 'notifications#join_room', as: :join_room
-  get 'accept_join/:id', to: 'notifications#accept_join', as: :accept_join
-  get 'reject_join/:id', to: 'notifications#reject_join', as: :reject_join
+  post 'join_room_request/:id', to: 'notifications#join_room_request', as: :join_room_request
+  get 'approve_join_request/:id', to: 'notifications#approve_join_request', as: :approve_join_request
+  get 'disapprove_join_request/:id', to: 'notifications#disapprove_join_request', as: :disapprove_join_request
+  get 'accept_invite_request/:id', to: 'notifications#accept_invite_request', as: :accept_invite_request
+  get 'reject_invite_request/:id', to: 'notifications#reject_invite_request', as: :reject_invite_request
 end

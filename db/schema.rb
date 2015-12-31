@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151225090602) do
+ActiveRecord::Schema.define(version: 20151231023927) do
 
   create_table "messages", force: :cascade do |t|
     t.text     "content"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20151225090602) do
     t.integer  "notifiable_id"
     t.string   "notifiable_type"
     t.boolean  "solved",          default: false
+    t.integer  "n_type",          default: 0
     t.index ["notifiable_id", "notifiable_type"], name: "index_notifications_on_notifiable_id_and_notifiable_type"
   end
 
