@@ -5,13 +5,7 @@ class NotificationsController < ApplicationController
   end
 
   def join_room_request
-    @room = Room.find(params[:id])
-    @notification = Notification.new(notification_params.merge(title: "Join request to your room #{@room.name}",
-                                                               actor_id: current_user.id,
-                                                               recipient_id: @room.owner_id,
-                                                               notifiable: @room,
-                                                               n_type: "join_request"))
-    if @notification.save
+    if NotificationService.new(params, current_user).deal_with_join_request
       flash[:success] = 'Please wait for accepet.'
     end
     respond_to do |format|
@@ -21,21 +15,7 @@ class NotificationsController < ApplicationController
   end
 
   def accept_request
-    ActiveRecord::Base.transcation do
-      @notification = Notification.find_by!(id: params[:id])
-      @notification.update_attributes!(solved: true)
-      @room = Room.find_by!(id: @notification.notifiable.id)
-      # 邀请用户加入房间
-      if @notification.invite_request?
-        @user = User.find_by!(id: @notification.recipient_id)
-        Notification.create_accept_invite(@notification, current_user)
-      elsif @notification.join_request?
-        #接受用户申请加入房间的请求
-        @user = User.find_by!(id: @notification.actor_id)
-        Notification.create_accept_join(@notification, current_user)
-      end
-      @room << @user
-    end
+    @notification = NotificationService.new(params, current_user).deal_with_accept_request
     respond_to do |format|
       format.html { redirect_to notifications_url }
       format.js
@@ -43,25 +23,11 @@ class NotificationsController < ApplicationController
   end
 
   def reject_request
-    ActiveRecord::Base.transcation do
-      @notification = Notification.find_by!(id: params[:id])
-      @notification.update_attributes!(solved: true)
-      if @notification.invite_request?
-        Notification.create_reject_invite(@notification, current_user)
-      elsif @notification.join_request?
-        Notification.create_reject_join(@notification, current_user)
-      end
-    end
+    @notification = NotificationService.new(params, current_user).deal_with_reject_request
     respond_to do |format|
       format.html { redirect_to notifications_url }
       format.js
     end
-  end
-
-  private
-
-  def notification_params
-    params.require(:notification).permit(:content)
   end
 
 end

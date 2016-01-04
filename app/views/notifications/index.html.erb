@@ -19,18 +19,10 @@
                 <%= notification.content %>
                 <% unless notification.solved? %>
                   <span id="notification-deal<%= notification.id %>">
-                    <% if notification.n_type == "join_request" %>
-                      <span style="float: right" id="deal-room">
-                        <%= link_to 'Accept', approve_join_request_path(notification), class: "btn btn-primary", remote: true %>
-                        <%= link_to 'Reject', disapprove_join_request_path(notification), class: "btn btn-default", remote: true %>
-                      </span>
-                    <% end %>
-                    <% if notification.n_type == "invite_request" %>
-                      <span style="float: right" id="deal-room">
-                        <%= link_to 'Accept', accept_invite_request_path(notification), class: "btn btn-primary", remote: true %>
-                        <%= link_to 'Reject', reject_invite_request_path(notification), class: "btn btn-default", remote: true %>
-                      </span>
-                    <% end %>
+                    <span style="float: right" id="deal-room">
+                      <%= link_to 'Accept', accept_request_path(notification), class: "btn btn-primary", remote: true %>
+                      <%= link_to 'Reject', reject_request_path(notification), class: "btn btn-default", remote: true %>
+                    </span>
                   </span>
                 <% end %>
                 </li>

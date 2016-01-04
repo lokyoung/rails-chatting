@@ -43,7 +43,7 @@ class RoomsController < ApplicationController
   def add_member
     @room = Room.find(params[:id])
     @user = User.find(params[:user_id])
-    Notification.create!(title: "Room invite", content: "Request to invite you to join room #{@room.name}", actor_id: current_user.id, recipient_id: @user.id, notifiable: @room, n_type: "invite_request")
+    Notification.create_invite_request(@room, @user, current_user)
     flash[:success] = 'Please wait for accept'
     respond_to do |format|
       format.html { redirect_to @room }
@@ -54,9 +54,11 @@ class RoomsController < ApplicationController
   def remove_member
     @room = Room.find(params[:id])
     @user = User.find(params[:user_id])
-    @room.delete(@user)
-    # send notification to the user
-    Notification.create!(title: "Room kick off", content: "You have been kick off from room #{@room.name}", actor_id: current_user.id, recipient_id: @user.id, notifiable: @room, solved: true)
+    ActiveRecord::Base.transcation do
+      @room.delete(@user)
+      # send notification to the user
+      Notification.create_remove_member(@room, @user, current_user)
+    end
     respond_to do |format|
       format.html { redirect_to @room }
       format.js
