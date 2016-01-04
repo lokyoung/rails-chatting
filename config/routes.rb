@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     end
   end
 
+  # notification options
   resources :notifications
   post 'join_room_request/:id', to: 'notifications#join_room_request', as: :join_room_request
   get 'approve_join_request/:id', to: 'notifications#approve_join_request', as: :approve_join_request
