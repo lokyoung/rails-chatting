@@ -20,8 +20,8 @@
                 <% unless notification.solved? %>
                   <span id="notification-deal<%= notification.id %>">
                     <span style="float: right" id="deal-room">
-                      <%= link_to 'Accept', accept_request_path(notification), class: "btn btn-primary", remote: true %>
-                      <%= link_to 'Reject', reject_request_path(notification), class: "btn btn-default", remote: true %>
+                      <%= link_to 'Accept', accept_request_notification_path(notification), class: "btn btn-primary", remote: true %>
+                      <%= link_to 'Reject', reject_request_notification_path(notification), class: "btn btn-default", remote: true %>
                     </span>
                   </span>
                 <% end %>

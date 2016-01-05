@@ -15,9 +15,7 @@ class RoomsController < ApplicationController
   end
 
   def create
-    @room = Room.new(room_params.merge(owner_id: current_user.id))
-    @rooms = Room.page params[:page]
-    if @room.save
+    if RoomService.deal_with_create_room(room_params, current_user)
       flash[:success] = "Create room suceess"
       @room << current_user
       respond_to do |format|
@@ -30,10 +28,8 @@ class RoomsController < ApplicationController
   end
 
   def destroy
-    @room = Room.find(params[:id])
-    @room.destroy
+    RoomService.deal_with_destroy_room
     flash[:success] = 'Room has been destory'
-    @rooms = Room.page(params[:page])
     respond_to do |format|
       format.html { redirect_to rooms_url }
       format.js
@@ -41,9 +37,7 @@ class RoomsController < ApplicationController
   end
 
   def add_member
-    @room = Room.find(params[:id])
-    @user = User.find(params[:user_id])
-    Notification.create_invite_request(@room, @user, current_user)
+    @room = RoomService.deal_with_add_member(params, current_user)
     flash[:success] = 'Please wait for accept'
     respond_to do |format|
       format.html { redirect_to @room }
@@ -52,13 +46,7 @@ class RoomsController < ApplicationController
   end
 
   def remove_member
-    @room = Room.find(params[:id])
-    @user = User.find(params[:user_id])
-    ActiveRecord::Base.transcation do
-      @room.delete(@user)
-      # send notification to the user
-      Notification.create_remove_member(@room, @user, current_user)
-    end
+    @room = RoomService.deal_with_remove_member(params, current_user)
     respond_to do |format|
       format.html { redirect_to @room }
       format.js

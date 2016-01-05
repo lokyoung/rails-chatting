@@ -1,5 +1,6 @@
 ## Realtime Chatting
-This is a realtime-chatting room app base on Rails5
+This is a realtime-chatting room app base on Rails5. Use ActionCable to
+make the user can talk to each other real-time.
 
 ## Requirements
 * Ruby 2.2.0 +
@@ -12,4 +13,5 @@ This is a realtime-chatting room app base on Rails5
 $ bundle install
 $ bin/rails db:migrate
 $ bin/rails server
+$ sidekiq
 ```
