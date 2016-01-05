@@ -5,7 +5,7 @@ make the user can talk to each other real-time.
 ## Requirements
 * Ruby 2.2.0 +
 * Rails 5.0.0 + (currently beta)
-* Reids 2.2 +
+* Redis 2.2 +
 * Postgresql, Mysql or sqlite3
 
 ## Run
